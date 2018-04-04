@@ -149,32 +149,49 @@
 	assigned-clocks = <&clks IMX6UL_CLK_PLL4_POST_DIV>;
 	assigned-clock-rates = <812851200>;
 };
-
 &fec1 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_enet1>;
-	phy-mode = "rmii";
-	phy-reset-gpios=<&gpio5 0 1>;
-	phy-reset-duration=<100>;
-	phy-reset-on-resume;
-	phy-handle = <&ethphy0>;
-	status = "okay";
-	mdio {
-		#address-cells = <1>;
-		#size-cells = <0>;
-
-		ethphy0: ethernet-phy@1 {
-			compatible = "ethernet-phy-ieee802.3-c22";
-			micrel,rmii-reference-clock-select-25-mhz;
-			clocks = <&rmii_ref_clk>;
-			clock-names = "rmii-ref";
-			reg = <1>;
-		};
-
-	};
+    pinctrl-names = "default";
+    pinctrl-0 = <&pinctrl_enet1>;
+    phy-mode = "rmii";
+    phy-reset-gpios=<&gpio5 0 1>;
+    phy-reset-duration=<100>;
+    phy-reset-on-resume;
+    phy-handle = <&ethphy0>;
+    status = "okay";
 };
 
-&can1 {
+&fec2 {
+    pinctrl-names = "default";
+    pinctrl-0 = <&pinctrl_enet2>;
+    phy-mode = "rmii";
+    phy-handle = <&ethphy1>;
+    phy-reset-gpios=<&gpio1 10 1>;
+    phy-reset-duration=<100>;
+    phy-reset-on-resume;
+    status = "okay";
+    mdio {
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	ethphy0: ethernet-phy@1 {
+	    compatible = "ethernet-phy-ieee802.3-c22";
+	    micrel,rmii-reference-clock-select-25-mhz;
+	    clocks = <&rmii_ref_clk>;
+	    clock-names = "rmii-ref";
+	    reg = <1>;
+	};
+
+	ethphy1: ethernet-phy@3 {
+	    compatible = "ethernet-phy-ieee802.3-c22";
+	    micrel,rmii-reference-clock-select-25-mhz;
+	    clocks = <&rmii_ref_clk>;
+	    clock-names = "rmii-ref";
+	    reg = <3>;
+	};
+    };
+};
+
+can1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_flexcan1>;
 	status = "okay";
@@ -199,9 +216,9 @@ status = "disabled";
 };
 
 &pwm1 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_pwm1>;
-	status = "okay";
+/*	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_pwm1>;*/
+	status = "disabled";
 };
 
 &pxp {
@@ -408,7 +425,7 @@ status = "disabled";
 		compatible = "renesas,rh850";
 		reg = <0>;
 		interrupt-parent = <&gpio4>;
- 		interrupts = <22 IRQ_TYPE_EDGE_FALLING>;
+ 		interrupts = <24 IRQ_TYPE_EDGE_FALLING>;
 		spi-max-frequency = <5000000>;
 	};
 
@@ -441,7 +458,21 @@ status = "disabled";
 			>;
 		};
 
-		pinctrl_flexcan2; flexcan2grp{
+	        pinctrl_enet2: enet2grp {
+		        fsl,pins = <
+				MX6UL_PAD_ENET2_RX_EN__ENET2_RX_EN	0x1b0b0
+				MX6UL_PAD_ENET2_RX_ER__ENET2_RX_ER	0x1b0b0
+				MX6UL_PAD_ENET2_RX_DATA0__ENET2_RDATA00	0x1b0b0
+				MX6UL_PAD_ENET2_RX_DATA1__ENET2_RDATA01	0x1b0b0
+				MX6UL_PAD_ENET2_TX_EN__ENET2_TX_EN	0x1b0b0
+				MX6UL_PAD_ENET2_TX_DATA0__ENET2_TDATA00	0x1b0b0
+				MX6UL_PAD_ENET2_TX_DATA1__ENET2_TDATA01	0x1b0b0
+				MX6UL_PAD_ENET2_TX_CLK__ENET2_REF_CLK2	0x4001b031
+				MX6UL_PAD_JTAG_MOD__GPIO1_IO10		0x1b0b0
+		        >;
+		};
+
+		pinctrl_flexcan2: flexcan2grp{
 			fsl,pins = <
 				MX6UL_PAD_LCD_DATA11__FLEXCAN2_RX	0x1b020
 				MX6UL_PAD_LCD_DATA10__FLEXCAN2_TX	0x1b020
@@ -588,14 +619,14 @@ status = "disabled";
 		};
 
 		pinctrl_ecspi1_1: ecspi1grp {
-+			fsl,pins = <
-+				MX6UL_PAD_CSI_DATA07__ECSPI1_MISO	0x100b1
-+				MX6UL_PAD_CSI_DATA06__ECSPI1_MOSI	0x100b1
-+				MX6UL_PAD_CSI_DATA04__ECSPI1_SCLK	0x100b1
-+				MX6UL_PAD_CSI_DATA05__GPIO4_IO26	0x80000000
-+				MX6UL_PAD_CSI_DATA03__GPIO4_IO22	0x1b0b1
-+			>;
-+		};
+			fsl,pins = <
+				MX6UL_PAD_CSI_DATA07__ECSPI1_MISO	0x100b1
+				MX6UL_PAD_CSI_DATA06__ECSPI1_MOSI	0x100b1
+				MX6UL_PAD_CSI_DATA04__ECSPI1_SCLK	0x100b1
+				MX6UL_PAD_CSI_DATA05__GPIO4_IO26	0x80000000
+				MX6UL_PAD_CSI_DATA03__GPIO4_IO24	0x1b0b1
+			>;
+		};
 
 	};
 };
