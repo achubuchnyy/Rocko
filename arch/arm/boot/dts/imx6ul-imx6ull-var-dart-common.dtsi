@@ -127,36 +127,6 @@
 			linux,default-trigger = "heartbeat";
 		};
 	};
-
-cpus {
-          #address-cells = <1>;
-          #size-cells = <0>;
-
-          cpu0: cpu@0 {
-               compatible = "arm,cortex-a7";
-               device_type = "cpu";
-               reg = <0>;
-               clock-latency = <61036>; /* two CLK32 periods */
-               operating-points = <
-                    /* kHz     uV */
-                    996000     1275000
-                    900000     1275000
-                    792000     1225000
-                    528000     1175000
-                    396000     1025000
-                    198000     950000
-               >;
-               fsl,soc-operating-points = <
-                    /* KHz     uV */
-                    996000     1175000
-                    900000     1175000
-                    792000     1175000
-                    528000     1175000
-                    396000     1175000
-                    198000     1175000
-               >;
-		}
-	}
 };
 
 &cpu0 {
