@@ -215,9 +215,9 @@ status = "disabled";
 
 
 
-&pwm1 {
+&pwm2 {
 	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_pwm0>;
+	pinctrl-0 = <&pinctrl_pwm2>;
 	status = "okay";
 };
 
@@ -232,6 +232,7 @@ status = "disabled";
 
 &adc1 {
 	vref-supply = <&touch_3v3_regulator>;
+	num-channels = <3>;
 	status = "okay";
 };
 
@@ -494,7 +495,7 @@ status = "disabled";
 
 
 
-		pinctrl_pwm0: pwm1grp {
+		pinctrl_pwm2: pwm2grp {
 			fsl,pins = <
 				MX6UL_PAD_GPIO1_IO09__PWM2_OUT		0x1b0b0	/* pwm2 HS_OUT1*/
 			>;
