@@ -21,11 +21,8 @@
 	};
 
 	backlight {
-		compatible = "pwm-backlight";
-		pwms = <&pwm1 0 20000>;
-		brightness-levels = <0 4 8 16 32 64 128 255>;
-		default-brightness-level = <6>;
-		status = "okay";
+		
+		status = "disabled";
 	};
 
 	pxp_v4l2 {
@@ -109,7 +106,7 @@
 			"RLINEIN",		"Line Jack";
 	};*/
 
-	keys {
+	/*keys {
 		compatible = "gpio-keys";
 
 		user {
@@ -126,7 +123,7 @@
 			gpios = <&gpio4 20 0>;
 			linux,default-trigger = "heartbeat";
 		};
-	};
+	};*/
 };
 
 &cpu0 {
@@ -215,16 +212,12 @@
 status = "disabled";
 };
 
+
+
+
 &pwm1 {
-	/*pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_pwm1>;*/
-	status = "disabled";
-};
-
-
-&pwm2 {
 	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_pwm2>;
+	pinctrl-0 = <&pinctrl_pwm0>;
 	status = "okay";
 };
 
@@ -501,7 +494,7 @@ status = "disabled";
 
 
 
-		pinctrl_pwm2: pwm1grp {
+		pinctrl_pwm0: pwm1grp {
 			fsl,pins = <
 				MX6UL_PAD_GPIO1_IO09__PWM2_OUT		0x1b0b0	/* pwm2 HS_OUT1*/
 			>;
@@ -616,14 +609,14 @@ status = "disabled";
 			>;
 		};
 
-		pinctrl_tsc: tscgrp {
+		/*pinctrl_tsc: tscgrp {
 			fsl,pins = <
 				MX6UL_PAD_GPIO1_IO01__GPIO1_IO01	0xb0
 				MX6UL_PAD_GPIO1_IO02__GPIO1_IO02	0xb0
 				MX6UL_PAD_GPIO1_IO03__GPIO1_IO03	0xb0
 				MX6UL_PAD_GPIO1_IO04__GPIO1_IO04	0xb0
 			>;
-		};
+		};*/
 
 		pinctrl_wdog: wdoggrp {
 			fsl,pins = <
