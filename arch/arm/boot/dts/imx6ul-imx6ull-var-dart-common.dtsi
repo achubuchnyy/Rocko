@@ -392,10 +392,16 @@ status = "disabled";
 		touchscreen-inverted-y;
 	};
 
-	/* DS1307 RTC module */
+	/* DS1307 RTC module 
 	rtc@0x68 {
 		compatible = "dallas,ds1307";
 		reg = <0x68>;
+	};*/
+	rtc@0x68 {
+		compatible = "isil,isl12057";
+		reg = <0x68>;
+		interrupt-parent = <&gpio5>;
+		interrupts = <7 IRQ_TYPE_EDGE_FALLING>;
 	};
 };
 
@@ -430,13 +436,20 @@ status = "disabled";
 				MX6UL_PAD_GPIO1_IO02__GPIO1_IO02	0x1b0b0	/* ADC1_2 - Ignition*/
 				MX6UL_PAD_GPIO1_IO07__ENET1_MDC		0x1b0b0
 				MX6UL_PAD_GPIO1_IO06__ENET1_MDIO	0x1b0b0
-				MX6UL_PAD_ENET2_RX_DATA0__GPIO2_IO08	0x1b0b0
-				MX6UL_PAD_ENET2_RX_DATA1__GPIO2_IO09	0x1b0b0
-				MX6UL_PAD_ENET2_RX_EN__GPIO2_IO10	0x1b0b0
-				MX6UL_PAD_ENET2_TX_DATA0__GPIO2_IO11	0x1b0b0
+				MX6UL_PAD_ENET2_RX_DATA0__GPIO2_IO08	0x1b0b0 /*5V DCDC*/
+				MX6UL_PAD_ENET2_RX_DATA1__GPIO2_IO09	0x1b0b0 /*3V pery*/
+				MX6UL_PAD_ENET2_RX_EN__GPIO2_IO10	0x1b0b0 /*5V can trans*/
+				MX6UL_PAD_ENET2_TX_DATA0__GPIO2_IO11	0x1b0b0 /*3V RF*/
 				MX6UL_PAD_ENET2_TX_DATA1__GPIO2_IO12	0x1b0b0 /* usb_otg1_pwr*/
 				MX6UL_PAD_ENET2_TX_EN__GPIO2_IO13	0x1b0b0 /* usb_otg2_pwr*/
-				MX6UL_PAD_ENET2_TX_CLK__GPIO2_IO14	0x1b0b0
+				MX6UL_PAD_ENET2_TX_CLK__GPIO2_IO14	0x1b0b0 /*can1 sielent*/
+				MX6UL_PAD_LCD_VSYNC__GPIO3_IO03		0x1b0b0 /*reset wwan*/
+				MX6UL_PAD_LCD_ENABLE__GPIO3_IO01	0x1b0b0 /*disable wwan*/
+				MX6UL_PAD_LCD_HSYNC__GPIO3_IO02		0x1b0b0	/*wake wwan*/
+				MX6UL_PAD_LCD_RESET__GPIO3_IO04		0x1b0b0 /*spc560 reset*/
+				MX6UL_PAD_SNVS_TAMPER7__GPIO5_IO07	0x1b0b0	/*rts*/
+ 				MX6UL_PAD_SNVS_TAMPER8__GPIO5_IO08	0x1b0b0 /*acc*/
+				
 			>;
 		};
 
