@@ -156,17 +156,6 @@
     phy-handle = <&ethphy0>;
     status = "okay";
 
-};
- 
-&fec2 {
-    pinctrl-names = "default";
-    pinctrl-0 = <&pinctrl_enet1>;
-    phy-mode = "rmii";
-    phy-handle = <&ethphy1>;
-    phy-reset-gpios=<&gpio5 0 1>;
-    phy-reset-duration=<100>;
-    phy-reset-on-resume;
-    status = "okay";
     mdio {
 	#address-cells = <1>;
 	#size-cells = <0>;
@@ -178,13 +167,13 @@
 	    clock-names = "rmii-ref";
 	    reg = <1>;
 	};
-	ethphy1: ethernet-phy@3 {
+	/*ethphy1: ethernet-phy@3 {
  	    compatible = "ethernet-phy-ieee802.3-c22";
  	    micrel,rmii-reference-clock-select-25-mhz;
  	    clocks = <&rmii_ref_clk>;
  	    clock-names = "rmii-ref";
  	    reg = <3>;
-	};
+	};*/
 
 	
     };
