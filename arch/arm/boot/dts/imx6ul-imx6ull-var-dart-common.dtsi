@@ -160,10 +160,10 @@
  
 &fec2 {
     pinctrl-names = "default";
-    pinctrl-0 = <&pinctrl_enet2>;
+    pinctrl-0 = <&pinctrl_enet1>;
     phy-mode = "rmii";
     phy-handle = <&ethphy1>;
-    phy-reset-gpios=<&gpio1 10 1>;
+    phy-reset-gpios=<&gpio5 0 1>;
     phy-reset-duration=<100>;
     phy-reset-on-resume;
     status = "okay";
@@ -411,17 +411,17 @@ status = "disabled";
 		touchscreen-inverted-y;
 	};
 
-	/* DS1307 RTC module 
+	/* DS1307 RTC module */
 	rtc@0x68 {
 		compatible = "dallas,ds1307";
 		reg = <0x68>;
-	};*/
-	rtc@0x68 {
+	};
+	/*rtc@0x68 {
 		compatible = "isil,isl12057";
 		reg = <0x68>;
 		interrupt-parent = <&gpio5>;
 		interrupts = <7 IRQ_TYPE_EDGE_FALLING>;
-	};
+	};*/
 };
 
 &ecspi1 {
@@ -490,10 +490,6 @@ status = "disabled";
 		        fsl,pins = <
 				MX6UL_PAD_ENET2_RX_EN__ENET2_RX_EN	0x1b0b0
 				MX6UL_PAD_ENET2_RX_ER__ENET2_RX_ER	0x1b0b0
-				/*MX6UL_PAD_ENET2_RX_DATA0__ENET2_RDATA00	0x1b0b0
-				MX6UL_PAD_ENET2_RX_DATA1__ENET2_RDATA01	0x1b0b0
-				MX6UL_PAD_ENET2_TX_EN__ENET2_TX_EN	0x1b0b0
-				MX6UL_PAD_ENET2_TX_DATA0__ENET2_TDATA00	0x1b0b0*/
 				MX6UL_PAD_ENET2_TX_DATA1__ENET2_TDATA01	0x1b0b0
 				MX6UL_PAD_ENET2_TX_CLK__ENET2_REF_CLK2	0x4001b031
 				MX6UL_PAD_JTAG_MOD__GPIO1_IO10		0x1b0b0
