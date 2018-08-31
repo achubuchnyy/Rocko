@@ -153,7 +153,7 @@
     phy-reset-gpios=<&gpio5 0 1>;
     phy-reset-duration=<100>;
     phy-reset-on-resume;
-    phy-handle = <&ethphy0>;
+    phy-handle = <&ethphy1>;
     status = "okay";
 
     mdio {
@@ -167,13 +167,13 @@
 	    clock-names = "rmii-ref";
 	    reg = <1>;
 	};
-	/*ethphy1: ethernet-phy@3 {
+	ethphy1: ethernet-phy@3 {
  	    compatible = "ethernet-phy-ieee802.3-c22";
  	    micrel,rmii-reference-clock-select-25-mhz;
  	    clocks = <&rmii_ref_clk>;
  	    clock-names = "rmii-ref";
  	    reg = <3>;
-	};*/
+	};
 
 	
     };
@@ -389,7 +389,7 @@ status = "disabled";
 		clock-names = "mclk";
 	};
 
-	ft5x06_ts@38 {
+	/*ft5x06_ts@38 {
 		compatible = "edt,edt-ft5x06";
 		reg = <0x38>;
 		interrupt-parent = <&gpio3>;
@@ -399,7 +399,7 @@ status = "disabled";
 		touchscreen-inverted-x;
 		touchscreen-inverted-y;
 	};
-
+*/
 	/* DS1307 RTC module */
 	rtc@0x68 {
 		compatible = "dallas,ds1307";
@@ -471,6 +471,7 @@ status = "disabled";
 				MX6UL_PAD_ENET1_TX_DATA0__ENET1_TDATA00	0x1b0b0
 				MX6UL_PAD_ENET1_TX_DATA1__ENET1_TDATA01	0x1b0b0
 				MX6UL_PAD_ENET1_TX_CLK__ENET1_REF_CLK1	0x4001b031
+				MX6UL_PAD_JTAG_MOD__GPIO1_IO10		0x1b0b0
 				
 			>;
 		};
