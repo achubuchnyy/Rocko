@@ -412,16 +412,16 @@ status = "disabled";
 	};
 */
 	/* DS1307 RTC module */
-	rtc@0x68 {
+	/*rtc@0x68 {
 		compatible = "dallas,ds1307";
 		reg = <0x68>;
-	};
-	/*rtc@0x68 {
+	};*/
+	rtc@0x68 {
 		compatible = "isil,isl12057";
 		reg = <0x68>;
 		interrupt-parent = <&gpio5>;
 		interrupts = <7 IRQ_TYPE_EDGE_FALLING>;
-	};*/
+	};
 };
 
 &ecspi1 {
@@ -468,6 +468,9 @@ status = "disabled";
 				MX6UL_PAD_LCD_RESET__GPIO3_IO04		0x1b0b0 /*spc560 reset*/
 				MX6UL_PAD_SNVS_TAMPER7__GPIO5_IO07	0x1b0b0	/*rts*/
  				MX6UL_PAD_SNVS_TAMPER8__GPIO5_IO08	0x1b0b0 /*acc*/
+#ifdef WIFI
+				MX6UL_PAD_GPIO1_IO03__REF_CLK_32K	0x03029	/* WLAN Slow Clock */
+#endif
 				
 			>;
 		};
