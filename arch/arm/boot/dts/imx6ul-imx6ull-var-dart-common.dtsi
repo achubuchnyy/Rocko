@@ -106,24 +106,28 @@
 			"RLINEIN",		"Line Jack";
 	};*/
 
-	/*keys {
+gpio_keys {
 		compatible = "gpio-keys";
-
-		user {
-			gpios = <&gpio1 0 GPIO_ACTIVE_LOW>;
-			linux,code = <KEY_BACK>;
-			gpio-key,wakeup;
+		#address-cells = <1>;
+		#size-cells = <0>;
+		
+		button@1 {
+			debounce_interval = <50>;
+			label = "GPIO ACC";
+			linux,code = <103>;
+			gpios = <&gpio5 8 GPIO_ACTIVE_HIGH>;
+			wakeup-source;
 		};
-	};
-
-	leds {
-		compatible = "gpio-leds";
-
-		d16_led {
-			gpios = <&gpio4 20 0>;
-			linux,default-trigger = "heartbeat";
+		 button@2 {
+			debounce_interval = <50>;
+			label = "GPIO IGN";
+			linux,code = <116>;
+			gpios = <&gpio1 0 GPIO_ACTIVE_HIGH>;
+			wakeup-source;
 		};
-	};*/
+};
+
+
 };
 
 &cpu0 {
@@ -215,14 +219,14 @@ status = "disabled";
 };
 
 
-
+/*
 
 &pwm2 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_pwm2>;
 	status = "okay";
 };
-
+*/
 
 &pxp {
 	status = "okay";
@@ -421,7 +425,11 @@ status = "disabled";
 		reg = <0x68>;
 		interrupt-parent = <&gpio5>;
 		interrupts = <7 IRQ_TYPE_EDGE_FALLING>;
+		interrupt-names	= "wakeup";
+		wakeup-source;
+
 	};
+	
 };
 
 &ecspi1 {
@@ -468,9 +476,13 @@ status = "disabled";
 				MX6UL_PAD_LCD_RESET__GPIO3_IO04		0x1b0b0 /*spc560 reset*/
 				MX6UL_PAD_SNVS_TAMPER7__GPIO5_IO07	0x1b0b0	/*rts*/
  				MX6UL_PAD_SNVS_TAMPER8__GPIO5_IO08	0x1b0b0 /*acc*/
+
 #ifdef WIFI
 				MX6UL_PAD_GPIO1_IO03__REF_CLK_32K	0x03029	/* WLAN Slow Clock */
 #endif
+
+				MX6UL_PAD_GPIO1_IO09__GPIO1_IO09	0x1b0b0	/*HS1*/
+
 				
 			>;
 		};
@@ -510,11 +522,11 @@ status = "disabled";
 
 
 
-		pinctrl_pwm2: pwm2grp {
+		/*pinctrl_pwm2: pwm2grp {
 			fsl,pins = <
-				MX6UL_PAD_GPIO1_IO09__PWM2_OUT		0x1b0b0	/* pwm2 HS_OUT1*/
+				MX6UL_PAD_GPIO1_IO09__PWM2_OUT		0x1b0b0	
 			>;
-		};
+		};*/
 
 		pinctrl_uart1: uart1grp {
 			fsl,pins = <
